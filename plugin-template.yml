@@ -1,0 +1,14 @@
+main: me.zemf4you.wgspleef.frameworks.WGSpleefPlugin
+# noinspection YAMLSchemaValidation
+name: '${name}'
+version: '${version}'
+description: Spleef plugin integrated with WorldGuard
+load: POSTWORLD
+author: zemf4you
+website: vk.com/zemf4you
+depend: [ WorldGuard, WorldEdit ]
+softdepend: [ Vault ]
+commands:
+  spleef:
+    description: Spleef command
+    usage: /spleef
