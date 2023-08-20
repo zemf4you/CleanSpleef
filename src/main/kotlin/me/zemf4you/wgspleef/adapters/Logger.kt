@@ -1,4 +1,4 @@
-package me.zemf4you.wgspleef
+package me.zemf4you.wgspleef.adapters
 
 interface Logger {
     val name: String

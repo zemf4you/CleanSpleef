@@ -1,4 +1,4 @@
-package me.zemf4you.wgspleef
+package me.zemf4you.wgspleef.adapters
 
 class Slf4jLoggerAdapter(private val logger: org.slf4j.Logger) : Logger {
     override val name: String = logger.name

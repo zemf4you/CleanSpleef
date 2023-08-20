@@ -1,7 +1,7 @@
 package me.zemf4you.wgspleef.di
 
-import me.zemf4you.wgspleef.Logger
-import me.zemf4you.wgspleef.Slf4jLoggerAdapter
+import me.zemf4you.wgspleef.adapters.Logger
+import me.zemf4you.wgspleef.adapters.Slf4jLoggerAdapter
 import me.zemf4you.wgspleef.adapters.commands.SpleefCommand
 import me.zemf4you.wgspleef.adapters.commands.SpleefCommandImpl
 import org.koin.dsl.module
