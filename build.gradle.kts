@@ -24,7 +24,7 @@ dependencies {
     val logbackVersion = "1.4.11"
 
     compileOnly("io.papermc.paper:paper-api:$paperVersion")
-    compileOnly("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
     // Testing
