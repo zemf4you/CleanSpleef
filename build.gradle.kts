@@ -24,7 +24,8 @@ kotlin {
 }
 
 tasks.register("generatePluginYml", Copy::class) {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    outputs.upToDateWhen { false }
     from("plugin-template.yml")
     into("$buildDir/generated-resources")
     rename("plugin-template.yml", "plugin.yml")
