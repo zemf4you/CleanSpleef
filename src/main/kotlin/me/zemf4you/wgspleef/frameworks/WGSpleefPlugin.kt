@@ -5,21 +5,25 @@ import me.zemf4you.wgspleef.di.adapterModule
 import me.zemf4you.wgspleef.di.frameworkModule
 import me.zemf4you.wgspleef.di.useCaseModule
 import org.bukkit.plugin.java.JavaPlugin
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
-class WGSpleefPlugin : JavaPlugin(), KoinComponent {
+open class WGSpleefPlugin : JavaPlugin() {
     override fun onEnable() {
         super.onEnable()
         startKoin {
             modules(
                 frameworkModule(plugin = this@WGSpleefPlugin),
-                adapterModule(slf4jLogger = slF4JLogger),
+                adapterModule(),
                 useCaseModule(),
             )
+            val spleefCommand: SpleefCommand = koin.get()
+            getCommand("spleef")!!.setExecutor(spleefCommand)
         }
-        val spleefCommand: SpleefCommand = get()
-        getCommand("spleef")!!.setExecutor(spleefCommand)
+    }
+
+    override fun onDisable() {
+        super.onDisable()
+        stopKoin()
     }
 }

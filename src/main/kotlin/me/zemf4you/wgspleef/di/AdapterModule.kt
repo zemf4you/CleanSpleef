@@ -4,9 +4,10 @@ import me.zemf4you.wgspleef.adapters.Logger
 import me.zemf4you.wgspleef.adapters.Slf4jLoggerAdapter
 import me.zemf4you.wgspleef.adapters.commands.SpleefCommand
 import me.zemf4you.wgspleef.adapters.commands.SpleefCommandImpl
+import org.bukkit.plugin.java.JavaPlugin
 import org.koin.dsl.module
 
-fun adapterModule(slf4jLogger: org.slf4j.Logger) = module {
+fun adapterModule() = module {
     // commands
     single<SpleefCommand> { SpleefCommandImpl(get()) }
 
@@ -14,5 +15,8 @@ fun adapterModule(slf4jLogger: org.slf4j.Logger) = module {
     // TODO
 
     // adapters
-    single<Logger> { Slf4jLoggerAdapter(slf4jLogger) }
+    single<Logger> {
+        val plugin: JavaPlugin = get()
+        Slf4jLoggerAdapter(plugin.slF4JLogger)
+    }
 }
