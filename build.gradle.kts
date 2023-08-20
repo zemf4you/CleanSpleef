@@ -3,11 +3,8 @@ plugins {
     application
 }
 
-val pluginName = "YourPluginName"
-val pluginVersion = "1.0-SNAPSHOT"
-
 group = "me.zemf4you"
-version = pluginVersion
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -31,7 +28,7 @@ tasks.register("generatePluginYml", Copy::class) {
     from("plugin-template.yml")
     into("$buildDir/generated-resources")
     rename("plugin-template.yml", "plugin.yml")
-    expand("name" to pluginName, "version" to pluginVersion)
+    expand("name" to project.name, "version" to version)
 }
 
 tasks.jar {
