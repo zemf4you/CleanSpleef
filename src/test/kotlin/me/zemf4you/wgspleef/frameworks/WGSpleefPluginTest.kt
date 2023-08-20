@@ -32,11 +32,6 @@ class WGSpleefPluginTest {
     }
 
     @Test
-    fun `spleef command registered`() {
-        assertNotNull(plugin.getCommand("spleef")?.executor)
-    }
-
-    @Test
     fun `spleef command execute`() {
         player.performCommand("spleef")
         player.assertSaid("Pong!")
