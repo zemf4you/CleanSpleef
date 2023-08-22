@@ -1,0 +1,15 @@
+lang: ru
+arenas:
+  wgRegionNameExample:
+    world: world
+    minPlayers: 3
+    maxPlayers: 10
+    startCoords:
+      x: 1294.5
+      y: 97
+      z: -377.5
+    blockToBreak: SNOW_BLOCK
+    startItem: DIAMOND_SPADE
+    startCountdown: 10
+    startCountdownReset: false
+    reward: 50

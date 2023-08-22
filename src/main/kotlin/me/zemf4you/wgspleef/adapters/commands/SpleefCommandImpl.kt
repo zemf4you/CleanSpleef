@@ -1,6 +1,6 @@
 package me.zemf4you.wgspleef.adapters.commands
 
-import me.zemf4you.wgspleef.adapters.Logger
+import me.zemf4you.wgspleef.adapters.misc.Logger
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 

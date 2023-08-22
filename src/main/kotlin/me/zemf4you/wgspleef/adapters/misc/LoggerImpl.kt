@@ -1,8 +1,6 @@
-package me.zemf4you.wgspleef.adapters
+package me.zemf4you.wgspleef.adapters.misc
 
-class Slf4jLoggerAdapter(private val logger: org.slf4j.Logger) : Logger {
-    override val name: String = logger.name
-
+class LoggerImpl(private val logger: org.slf4j.Logger) : Logger {
     override fun trace(msg: String) = logger.trace(msg)
     override fun trace(format: String, vararg arguments: Any) = logger.trace(format, *arguments)
     override fun trace(msg: String, t: Throwable) = logger.trace(msg, t)

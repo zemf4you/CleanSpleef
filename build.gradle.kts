@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
     application
 }
 
@@ -17,30 +18,48 @@ kotlin {
 
 dependencies {
     val koinVersion = "3.4.3"
-    val bukkitVersion = "1.20"
-    val paperVersion = "$bukkitVersion-R0.1-SNAPSHOT"
+    val minecraftVersion = "1.20"
+    val paperVersion = "$minecraftVersion-R0.1-SNAPSHOT"
     val mockBukkitVersion = "3.9.0"
     val mockkVersion = "1.13.7"
     val logbackVersion = "1.4.11"
+    val kamlVersion = "0.55.0"
 
     compileOnly("io.papermc.paper:paper-api:$paperVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("com.charleskorn.kaml:kaml:$kamlVersion")
 
     // Testing
     testImplementation(kotlin("test"))
+    testImplementation("io.insert-koin:koin-test:$koinVersion") {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-test-junit")
+    }
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("io.insert-koin:koin-core:$koinVersion")
-    testImplementation("com.github.seeseemelk:MockBukkit-v$bukkitVersion:$mockBukkitVersion")
+    testImplementation("com.github.seeseemelk:MockBukkit-v$minecraftVersion:$mockBukkitVersion")
 }
 
 val generatedResources = "$buildDir/generated-resources"
 val mainResources = "src/main/resources"
+val testResources = "src/test/resources"
 
 sourceSets {
-    test {
+    main {
         resources.srcDirs(mainResources, generatedResources)
     }
+    test {
+        resources.srcDirs(testResources, generatedResources)
+    }
+}
+
+tasks.processTestResources {
+    dependsOn("generatePluginYml")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.processResources {
+    dependsOn("generatePluginYml")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.register("generatePluginYml", Copy::class) {
@@ -52,20 +71,10 @@ tasks.register("generatePluginYml", Copy::class) {
     expand("name" to project.name, "version" to version)
 }
 
-tasks.processTestResources {
-    dependsOn("generatePluginYml")
+tasks.build {
+    dependsOn(tasks.jar.name)
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.jar {
-    dependsOn("generatePluginYml")
-    from(generatedResources) {
-        include("plugin.yml")
-    }
-    from(mainResources) {
-        include("**/*")
-    }
 }

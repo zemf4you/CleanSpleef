@@ -1,8 +1,7 @@
-package me.zemf4you.wgspleef.adapters
+package me.zemf4you.wgspleef.adapters.misc
 
+@Suppress("unused")
 interface Logger {
-    val name: String
-
     fun trace(msg: String)
     fun trace(format: String, vararg arguments: Any)
     fun trace(msg: String, t: Throwable)

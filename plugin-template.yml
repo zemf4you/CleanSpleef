@@ -1,4 +1,4 @@
-main: me.zemf4you.wgspleef.frameworks.WGSpleefPlugin
+main: me.zemf4you.wgspleef.frameworks.WGSpleef
 # noinspection YAMLSchemaValidation
 name: '${name}'
 version: '${version}'

@@ -1,0 +1,37 @@
+prefix: "&8[&cSpleef&8]&e"
+common:
+  noPermission: "$prefix У вас нет прав на выполнение этой команды!"
+  playersOnly: "$prefix Данное действие могут совершать только игроки!"
+  unavailableCommand: "$prefix Вы не можете использовать команды во время игры!"
+game:
+  notEnoughPlayers: "$prefix Недостаточно игроков для начала игры!"
+  countdown: "$prefix &c$countdown&e..."
+  start: "$prefix Игра началась!"
+  end:
+    lose: "$prefix Вы проиграли!"
+    win:
+      reward: "$prefix Вы победили! На ваш баланс зачислено &c$reward$"
+      noReward: "$prefix Вы победили!"
+commands:
+  help:
+    admin: "&cАдминская помощь"
+    player: "&eПомощь игроку"
+  arenas:
+    header: "$prefix Арены:"
+    string: "&8- &e$item"
+    separator: "\n"
+  players:
+    header: "$prefix Игроки на арене:"
+    string: "&e- &c$item"
+    separator: "\n"
+  join:
+    success: "Вы присоединились к арене &c$arena&e."
+    fail:
+      alreadyIn: "$prefix Вы уже на арене &c$arena&e!"
+      arenaDoesNotExist: "$prefix Арены &c$arena &eне существует!"
+      arenaIsFull: "$prefix На арене &c$arena &eмаксимальное количество игроков!"
+      allArenasAreFull: "$prefix Все существующие арены заполнены!"
+  leave:
+    success: "$prefix Вы покинули арену!"
+    fail: "$prefix Вы не на арене!"
+  reload: "$prefix Конфиги успешно перезагружены!"
