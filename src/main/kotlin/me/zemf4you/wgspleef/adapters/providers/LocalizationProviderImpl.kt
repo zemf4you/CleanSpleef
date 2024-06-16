@@ -14,7 +14,9 @@ class LocalizationProviderImpl(
     }
 
     override fun loadConfig() {
-        val lang = configProvider.config.lang
-        this.config = yamlConfigLoader.loadConfig("languages/${lang}.yml", Localization::class)
+        this.config = yamlConfigLoader.loadConfig(
+            configFilePath = "languages/${configProvider.config.lang}.yml",
+            clazz = Localization::class,
+        )
     }
 }

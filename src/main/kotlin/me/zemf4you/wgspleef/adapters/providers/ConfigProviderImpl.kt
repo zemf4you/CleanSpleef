@@ -12,6 +12,9 @@ class ConfigProviderImpl(private val yamlConfigLoader: YamlConfigLoader) : Confi
     }
 
     override fun loadConfig() {
-        this.config = yamlConfigLoader.loadConfig("config.yml", Config::class)
+        this.config = yamlConfigLoader.loadConfig(
+            configFilePath = "config.yml",
+            clazz = Config::class,
+        )
     }
 }

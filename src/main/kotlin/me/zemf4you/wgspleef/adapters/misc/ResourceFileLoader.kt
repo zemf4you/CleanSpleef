@@ -3,5 +3,5 @@ package me.zemf4you.wgspleef.adapters.misc
 import java.io.File
 
 interface ResourceFileLoader {
-    fun copyResourceFile(resourcePath: String, destinationPath: String, overwrite: Boolean): File
+    fun loadResourceFile(resourcePath: String, overwrite: Boolean = false): File
 }

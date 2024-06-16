@@ -9,18 +9,11 @@ import kotlin.reflect.KClass
 class YamlConfigLoaderImpl(
     private val resourceFileLoader: ResourceFileLoader,
 ) : YamlConfigLoader {
-    override fun getConfigFile(configFilePath: String) =
-        resourceFileLoader.copyResourceFile(
-            resourcePath = configFilePath,
-            destinationPath = configFilePath,
-            overwrite = false,
-        )
-
     @OptIn(InternalSerializationApi::class)
     override fun <T : Any> loadConfig(configFilePath: String, clazz: KClass<T>): T {
-        val file = getConfigFile(configFilePath)
+        val configFile = resourceFileLoader.loadResourceFile(configFilePath)
         val serializer = clazz.serializer()
         val yaml = Yaml(serializersModuleOf(clazz, serializer))
-        return yaml.decodeFromStream(serializer, file.inputStream())
+        return yaml.decodeFromStream(serializer, configFile.inputStream())
     }
 }

@@ -14,17 +14,12 @@ class ResourceFileLoaderTest : BasePluginTest() {
 
     @Test
     fun `copy resource file from plugin`() {
-        val resourceURL = javaClass.classLoader.getResource("testResource.txt")
-        assertNotNull(resourceURL, "Resource not found")
-        val testResource = File(resourceURL.toURI())
-
-        val copiedFile = resourceFileLoader.copyResourceFile(
-            resourcePath = testResource.name,
-            destinationPath = testResource.name,
-            overwrite = true,
-        )
-
-        assertTrue { copiedFile.exists() }
-        assertContentEquals(testResource.readBytes(), copiedFile.readBytes())
+        val resourcePath = "testResource.txt"
+        val resourceURL = javaClass.classLoader.getResource(resourcePath)
+        assertNotNull(resourceURL, "Test resource not found")
+        val originalResourceFile = File(resourceURL.toURI())
+        val resourceFile = resourceFileLoader.loadResourceFile(resourcePath, overwrite = true)
+        assertTrue { resourceFile.exists() }
+        assertContentEquals(originalResourceFile.readBytes(), resourceFile.readBytes())
     }
 }
