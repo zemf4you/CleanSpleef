@@ -1,19 +1,29 @@
 package me.zemf4you.wgspleef.frameworks
 
-import me.zemf4you.wgspleef.CompositionRoot
+import me.zemf4you.wgspleef.adapters.commands.SpleefCommand
+import me.zemf4you.wgspleef.di.adapterModule
+import me.zemf4you.wgspleef.di.frameworkModule
+import me.zemf4you.wgspleef.di.useCaseModule
 import org.bukkit.plugin.java.JavaPlugin
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 open class WGSpleef : JavaPlugin() {
-    private lateinit var compositionRoot: CompositionRoot
-
     override fun onEnable() {
         super.onEnable()
-        compositionRoot = CompositionRoot(this)
-        compositionRoot.initialize()
+        startKoin {
+            modules(
+                frameworkModule(plugin = this@WGSpleef),
+                adapterModule(),
+                useCaseModule(),
+            )
+            val spleefCommand: SpleefCommand = koin.get()
+            this@WGSpleef.getCommand("spleef")!!.setExecutor(spleefCommand)
+        }
     }
 
     override fun onDisable() {
         super.onDisable()
-        compositionRoot.dispose()
+        stopKoin()
     }
 }
